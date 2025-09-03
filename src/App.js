@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -275,7 +275,7 @@ const pro = [
     ]
   }
 ];
-
+  const [show , setShow] = React.useState(false)
   const [value, setValue] = React.useState(0);
   const [loading, setloading] = React.useState(true);
   const [selected , setSelected] = React.useState(pro[0]);
@@ -285,7 +285,6 @@ const pro = [
   };
   
   const handleClick = (pro) => {
-    console.log(pro.categore)
     setSelected(pro);
   };
   useEffect(_=>{
@@ -298,6 +297,45 @@ return ()=>{
 }
   },[])
 
+  const handelGototop = ()=>{
+    window.scrollY()
+  }
+
+
+ useEffect(() => {
+    const handleScroll = () => {
+      console.log(show); // هيطبع قيمة show الحالية
+      if (window.scrollY > 100) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [show]); // لو عاوز تشوف show في console صح، لازم تحطها في dependencies
+
+
+
+      // useEffect(()=>{
+
+      //   const scrol = document.body.addEventListener("scroll",()=>{
+      //       console.log(show)
+      //     if (window.scrollY > 100 ) {
+      //       setShow(true)
+      //     }else {
+      //       setShow(false)
+  
+      //     }
+          
+      //   })
+      // },[])
+
   return (
 
     <>
@@ -305,7 +343,7 @@ return ()=>{
 <div className="loader" ></div>
 
     </div>
-      <header>
+      <header >
         <h2>
           قائمة المطعم
         </h2>
@@ -314,7 +352,7 @@ return ()=>{
         </div>
 
       </header>
-      <main>
+      <main >
         <Box sx={{ display: "flex", justifyContent: "center", direction: "rtl", maxWidth: { xs: 350, sm: 900 }, }}>
           <Tabs
             value={value}
@@ -357,6 +395,9 @@ return ()=>{
         </div>
         
            </main>
+           <div onClick={()=> window.scrollTo(0,0)} className={`goTop_top ${show ? "active" : ""}`}>
+            <img  src='../arrow.png' alt='goTop_top'/>
+           </ div>
     </>
   )
 }

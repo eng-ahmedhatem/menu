@@ -4,6 +4,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "IBM";
   src: url("../public/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-SemiBold.ttf");
@@ -17,6 +18,7 @@
   --secondBg: #eee;
 }
 * {
+  scroll-behavior: smooth;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -33,7 +35,7 @@
   font-family: var(--mainFont);
 }
 #root:has(.end) {
-  overflow: auto !important;
+  overflow: unset !important;
 }
 header {
   background: var(--firstBg);
@@ -202,3 +204,37 @@ main {
     opacity: 1;
   }
 }
+
+.goTop_top {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  left: 30px;
+  bottom: 40px;
+  background: #c08a5ad0;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  position: fixed;
+  transition: .3s;
+  transform: scale(0);
+  img {
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    transform: rotate(-90deg);
+  }
+}
+
+.goTop_top.active {
+  transform: scale(1);
+  
+}
+
