@@ -1,0 +1,162 @@
+@font-face {
+  font-family: "ReadexPro";
+  src: url("../public/Readex_Pro/static/ReadexPro-Regular.ttf");
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM";
+  src: url("../public/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-SemiBold.ttf");
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --mainFont: "ReadexPro", sans-serif;
+  --secondFont: "IBM", sans-serif;
+  --firstBg: #ffffff;
+  --secondBg: #eee;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--mainFont);
+  direction: rtl;
+}
+#root {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  height: 100svh;
+  font-family: var(--mainFont);
+}
+#root:has(.end) {
+  overflow: auto !important;
+}
+header {
+  background: var(--firstBg);
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+header .logo img {
+  width: 150px;
+}
+header h2 {
+  font-size: 20px;
+}
+main {
+  padding: 10px 15px;
+  background: var(--secondBg);
+}
+::-webkit-scrollbar {
+  width: 0px; /* Width of the vertical scrollbar */
+}
+
+.foods {
+  padding-top: 30px;
+  display: grid;
+  gap: 20px 0px;
+}
+.foods .card {
+  display: flex;
+  padding: 15px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  background: var(--firstBg);
+  box-shadow: 0px 0px 15px 1px #bf834f46;
+  -webkit-animation:slide-in-bottom .5s 3s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-bottom .5s 3s cubic-bezier(.25,.46,.45,.94) both
+}
+.foods .card .text {
+  flex: 1;
+  h1 {
+    font-size: 18px;
+    color: #bf844f;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  P {
+    font-size: 17px;
+    width: 90%;
+    margin-bottom: 10px;
+    color: #777;
+    font-family: var(--secondFont);
+    line-height: 1.4;
+  }
+  .price {
+    font-size: 16px;
+    font-weight: bold;
+    span {
+      display: inline-block;
+      margin: 0 0 0 5px;
+    }
+  }
+}
+.foods .card .img {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #bf844f;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+  }
+}
+/* HTML: <div class="loader"></div> */
+.loading {
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: #00000069;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: 3s;
+  backdrop-filter: blur(100px);
+}
+.end {
+  backdrop-filter: blur(0px) !important;
+  background: #00000000;
+  visibility: hidden;
+}
+.loader {
+  width: 100px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: #58b025;
+  animation: l15 1s infinite linear;
+}
+.loader::before,
+.loader::after {    
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+.loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+@keyframes l15{ 
+  100%{transform: rotate(1turn)}
+}
+@-webkit-keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}
