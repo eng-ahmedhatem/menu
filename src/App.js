@@ -285,10 +285,11 @@ const pro = [
   };
   
   const handleClick = (pro) => {
-    console.log(pro)
+    console.log(pro.categore)
     setSelected(pro);
   };
   useEffect(_=>{
+
 const tt = setTimeout(() => {
   setloading(false)
 }, 300);
@@ -329,24 +330,30 @@ return ()=>{
         </Box>   
         
         <div className='foods'>
-        {/* {pro.filter(ele=> ele === selected).data.map((food , id)=> <div>ddd</div>)} */}
-        {
-              pro.filter(ele=> ele.categore === selected.categore)[0].data.map((food,id)=> <div key={id} className='card'>
+        {pro.map((product,id)=> <div key={id} className={`tabsContent ${product.categore === selected.categore ? "active":""}`} >
+            {
+              pro.filter(ele=> ele.categore === product.categore)[0].data.map((food,id)=> <div style={{animationDelay:`0.${id}s`}}  key={id} className={`card `}>
                 <div className='text'>
                   <h1>{food.name}</h1>
                   <p>{food.description}</p>
                   <div className='price'>
-                  {food.price_afterOffer>0 ? <del style={{color:"#ff2a38c9"}}>{food.price_afterOffer}</del> : ""} 
-                  {food.price && <span style={{marginRight:food.price_afterOffer > 0 ?"5px":""}} >{food.price}</span>}
+          {food.price && <span style={{marginRight:food.price_afterOffer > 0 ?"5px":""}} >{food.price}</span>}
+
+
+                  {food.price_afterOffer>0 ? <span className='del' style={{color:"#ff2a38c9"}}>{food.price_afterOffer}</span> : ""} 
+
+        
                    جنية
                   </div>
                 </div>
                 <div className='img'>
 
-                <img src={food.img} alt="" />
+                <img src={food.img} loading='lazy' alt="" />
                 </div>
               </div>)
         }
+       
+        </div>)}    
         </div>
         
            </main>

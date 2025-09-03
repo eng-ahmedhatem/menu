@@ -25,6 +25,7 @@
 }
 #root {
   overflow: hidden;
+  height: fit-content;
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100vh;
@@ -55,11 +56,6 @@ main {
   width: 0px; /* Width of the vertical scrollbar */
 }
 
-.foods {
-  padding-top: 30px;
-  display: grid;
-  gap: 20px 0px;
-}
 .foods .card {
   display: flex;
   padding: 15px;
@@ -68,7 +64,19 @@ main {
   align-items: center;
   background: var(--firstBg);
   box-shadow: 0px 0px 15px 1px #bf834f46;
-  -webkit-animation:slide-in-bottom .5s 3s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-bottom .5s 3s cubic-bezier(.25,.46,.45,.94) both
+}
+.tabsContent {
+  display: none;
+  padding-top: 30px;
+}
+.tabsContent.active {
+  display: grid;
+  gap: 20px 0px;
+  & .card {
+    -webkit-animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: tilt-in-fwd-tr 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
 }
 .foods .card .text {
   flex: 1;
@@ -89,9 +97,14 @@ main {
   .price {
     font-size: 16px;
     font-weight: bold;
+    display: inline-block;
     span {
-      display: inline-block;
+      text-decoration: underline wavy green;
       margin: 0 0 0 5px;
+    }
+    .del {
+      color: red;
+      text-decoration: line-through #000;
     }
   }
 }
@@ -126,7 +139,7 @@ main {
   left: 0;
   pointer-events: none;
   z-index: 1;
-  transition: 3s;
+  transition: 2s;
   backdrop-filter: blur(100px);
 }
 .end {
@@ -144,7 +157,7 @@ main {
   animation: l15 1s infinite linear;
 }
 .loader::before,
-.loader::after {    
+.loader::after {
   content: "";
   grid-area: 1/1;
   margin: 2px;
@@ -156,7 +169,36 @@ main {
   margin: 8px;
   animation-duration: 3s;
 }
-@keyframes l15{ 
-  100%{transform: rotate(1turn)}
+@keyframes l15 {
+  100% {
+    transform: rotate(1turn);
+  }
 }
-@-webkit-keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}
+@-webkit-keyframes tilt-in-fwd-tr {
+  0% {
+    -webkit-transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px)
+      skew(-35deg, 10deg);
+    transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px)
+      skew(-35deg, 10deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    opacity: 1;
+  }
+}
+@keyframes tilt-in-fwd-tr {
+  0% {
+    -webkit-transform: rotateY(10deg) rotateX(15deg) translate(90px, -90px)
+      skew(-15deg, 10deg);
+    transform: rotateY(10deg) rotateX(15deg) translate(90px, -90px)
+      skew(-15deg, 10deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    opacity: 1;
+  }
+}
