@@ -48,8 +48,39 @@ header .logo img {
   width: 150px;
 }
 header h2 {
+  position: relative;
   font-size: 20px;
+  margin-right: 10px;
+  width: fit-content;
+  img {
+    width: 150px;
+    position: absolute;
+    bottom: -20px;
+    right: -15px;
+    transform: scale(0.6);
+    animation: scale 1s  infinite  alternate;
+  }
+  & span {
+    width: 10px;
+    height: 10px;
+    background: #bf844f;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -18px;
+    &:first-child {
+      right: -18px;
+    }
+    
+  }
 }
+@keyframes scale {
+  to {
+    transform: scale(1);
+  }
+}
+
 main {
   padding: 10px 15px;
   background: var(--secondBg);
@@ -111,6 +142,7 @@ main {
   }
 }
 .foods .card .img {
+  position: relative;
   width: 150px;
   height: 150px;
   border-radius: 10px;
@@ -120,7 +152,20 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height:40%;
+    transform: translateY(-50%);
+    border: 8px solid #ffffff;
+    border-radius: 20px;
+    left: -5px;
+    z-index: 1;
+  }
   img {
+    transform: scale(1.1) rotate(-3deg);
+    animation: rotate 1s infinite alternate-reverse;
     object-fit: cover;
     border-radius: 10px;
     width: 100%;
@@ -223,7 +268,7 @@ main {
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0px 0px rgba(255, 255, 255, 0);
   position: fixed;
-  transition: .3s;
+  transition: 0.3s;
   transform: scale(0);
   img {
     width: 40px;
@@ -235,6 +280,10 @@ main {
 
 .goTop_top.active {
   transform: scale(1);
-  
 }
 
+@keyframes rotate {
+  to {
+    transform:scale(1.2) rotate(3deg);
+  }
+}

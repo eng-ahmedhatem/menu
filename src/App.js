@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-
 export default function App() {
 const pro = [
   {
@@ -279,16 +278,13 @@ const pro = [
   const [value, setValue] = React.useState(0);
   const [loading, setloading] = React.useState(true);
   const [selected , setSelected] = React.useState(pro[0]);
-  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
   const handleClick = (pro) => {
     setSelected(pro);
   };
   useEffect(_=>{
-
 const tt = setTimeout(() => {
   setloading(false)
 }, 300);
@@ -296,12 +292,6 @@ return ()=>{
   clearInterval(tt)
 }
   },[])
-
-  const handelGototop = ()=>{
-    window.scrollY()
-  }
-
-
  useEffect(() => {
     const handleScroll = () => {
       console.log(show); // هيطبع قيمة show الحالية
@@ -311,46 +301,27 @@ return ()=>{
         setShow(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-
     // cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [show]); // لو عاوز تشوف show في console صح، لازم تحطها في dependencies
-
-
-
-      // useEffect(()=>{
-
-      //   const scrol = document.body.addEventListener("scroll",()=>{
-      //       console.log(show)
-      //     if (window.scrollY > 100 ) {
-      //       setShow(true)
-      //     }else {
-      //       setShow(false)
-  
-      //     }
-          
-      //   })
-      // },[])
-
+  }, [show]); 
   return (
-
     <>
     <div className={`loading ${loading ? "":"end"}`}>
 <div className="loader" ></div>
-
     </div>
       <header >
         <h2>
           قائمة المطعم
+          <span></span>
+          <span></span>
+          <img src='../line.png' alt='line'/>
         </h2>
         <div className='logo'>
           <img src="../logo.png" alt="شعار" />
         </div>
-
       </header>
       <main >
         <Box sx={{ display: "flex", justifyContent: "center", direction: "rtl", maxWidth: { xs: 350, sm: 900 }, }}>
@@ -362,11 +333,8 @@ return ()=>{
             aria-label="scrollable auto tabs example"
           >
             {pro.map((pro, id) => <Tab  key={id} onClick={ ()=> handleClick(pro)} sx={{ fontSize: "16px", }} label={pro.categore} />)}
-
           </Tabs>
-
         </Box>   
-        
         <div className='foods'>
         {pro.map((product,id)=> <div key={id} className={`tabsContent ${product.categore === selected.categore ? "active":""}`} >
             {
@@ -376,24 +344,17 @@ return ()=>{
                   <p>{food.description}</p>
                   <div className='price'>
           {food.price && <span style={{marginRight:food.price_afterOffer > 0 ?"5px":""}} >{food.price}</span>}
-
-
                   {food.price_afterOffer>0 ? <span className='del' style={{color:"#ff2a38c9"}}>{food.price_afterOffer}</span> : ""} 
-
-        
                    جنية
                   </div>
                 </div>
                 <div className='img'>
-
                 <img src={food.img} loading='lazy' alt="" />
                 </div>
               </div>)
         }
-       
         </div>)}    
         </div>
-        
            </main>
            <div onClick={()=> window.scrollTo(0,0)} className={`goTop_top ${show ? "active" : ""}`}>
             <img  src='../arrow.png' alt='goTop_top'/>
